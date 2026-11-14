@@ -1,0 +1,29 @@
+[
+  {
+    "id": "gta6-official-setting",
+    "topic": "The world of GTA VI",
+    "category": "official_fact",
+    "claim": "Grand Theft Auto VI is set in the fictional state of Leonida, inspired by Florida, with Vice City as a major location.",
+    "context": "The setting was shown in Rockstar's official announcement materials and trailers.",
+    "source": "https://www.rockstargames.com/VI",
+    "angle": "How a fictional Florida-inspired setting can shape the game's atmosphere"
+  },
+  {
+    "id": "gta6-protagonists",
+    "topic": "Jason and Lucia",
+    "category": "official_fact",
+    "claim": "The two central characters revealed by Rockstar are Lucia and Jason.",
+    "context": "Rockstar's official materials introduce them as the central duo.",
+    "source": "https://www.rockstargames.com/VI",
+    "angle": "Why a two-character story creates interesting possibilities for mission design"
+  },
+  {
+    "id": "gta6-leonida",
+    "topic": "Leonida",
+    "category": "official_fact",
+    "claim": "Leonida is the fictional state where GTA VI takes place.",
+    "context": "The name appears in Rockstar's official GTA VI materials.",
+    "source": "https://www.rockstargames.com/VI",
+    "angle": "What the fictional state's identity tells us about the setting"
+  }
+]
