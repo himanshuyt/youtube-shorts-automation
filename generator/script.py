@@ -27,7 +27,7 @@ def make_script(category, item):
         description = "An original short story created for this channel. Characters and events are fictional."
         tags = ["ShortStory", "AnimatedStory", "Storytime"]
     script = " ".join(lines)
-    return {"title": title[:95], "description": description, "tags": tags, "script": script, "scenes": lines}
+    return {"title": title[:95], "description": description, "tags": tags, "script": script, "scenes": lines, "category_id": "20" if category == "gta6" else "22"}
 
 def estimate_duration(script, words_per_minute=145):
     words = len(script.split())
