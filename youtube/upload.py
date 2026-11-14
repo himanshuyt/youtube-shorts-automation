@@ -42,7 +42,7 @@ def upload_video(video_path, metadata, schedule_public=False):
             "title": metadata["title"],
             "description": metadata["description"] + "\n\n#Shorts",
             "tags": metadata["tags"] + ["Shorts"],
-            "categoryId": "20"
+            "categoryId": metadata["category_id"]
         },
         "status": status
     }
