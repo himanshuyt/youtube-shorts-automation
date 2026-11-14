@@ -2,6 +2,12 @@ name: Daily Shorts
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Render a test video without uploading"
+        required: true
+        type: boolean
+        default: true
   schedule:
     # 18:30 Asia/Kolkata (UTC+5:30). GitHub may delay scheduled workflows.
     - cron: "0 13 * * *"
@@ -37,7 +43,12 @@ jobs:
       - name: Install Python dependencies
         run: python -m pip install -r requirements.txt
 
+      - name: Render test video
+        if: github.event_name == 'workflow_dispatch' && inputs.dry_run
+        run: python main.py --dry-run
+
       - name: Generate and upload Short
+        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && !inputs.dry_run)
         env:
           YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
