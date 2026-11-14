@@ -1,56 +1,59 @@
 # YouTube Shorts Automation
 
-A zero-subscription, cloud-run starter for a daily vertical Shorts channel covering **GTA 6** and **original animated micro-stories**.
+A zero-subscription, cloud-run starter for one daily YouTube Short covering **GTA 6** and **original short stories**.
 
-## What this version does
+## Current implementation
 
-- Runs in GitHub Actions (no computer needs to stay on).
-- Alternates between GTA 6 explainers and original short stories.
-- Uses a curated, editable fact bank for GTA 6. It does **not** invent breaking news or claim rumours are confirmed.
-- Generates narration with the runner's local `espeak-ng` voice and renders a vertical 1080x1920 video with animated text cards using Pillow + FFmpeg.
-- Uploads through the YouTube Data API using OAuth refresh-token credentials.
-- Keeps a history file to avoid repeating topics.
-- Defaults to **private test uploads** until you deliberately enable publishing.
+- GitHub Actions runs in the cloud; no personal computer needs to stay on.
+- Alternates GTA 6 explainers and original short stories.
+- GTA 6 scripts use a small checked-in fact bank and include source links. The starter does not fetch breaking news or invent new facts.
+- Narration uses the runner's local `espeak-ng` voice.
+- Pillow + FFmpeg render a vertical 1080x1920 video from original text-card scenes.
+- YouTube uploads use OAuth refresh-token credentials.
+- A JSON history tracks used topics and successful uploads.
+- Manual workflow runs default to a safe video-only dry run.
 
-## Important constraints
+## Honest limitations
 
-This is a practical no-paid-API starter, not a finished AI animation studio. The current renderer creates designed text-card scenes with synthetic narration; it does not yet generate moving character animation or AI images. GitHub-hosted runners are temporary and are not suitable for running large AI video models. A genuinely free and reliable animation/image provider would need to be added and tested before claiming full AI animation.
+This is a working starter, not a finished AI animation studio. The current renderer creates designed text-card scenes with synthetic narration; it does **not** yet generate moving character animation or AI images. The scripts are generated from local templates/seeds, not a cloud LLM. Large AI video models are not practical on standard free GitHub runners. A genuinely free and reliable AI animation provider would need to be added and tested separately.
 
-YouTube Data API projects that have not passed the required audit may be restricted to private uploads. The code therefore supports private test mode and scheduled publishing, but publishing is not guaranteed until Google's API project is eligible. Never put OAuth credentials in the repository.
+Google may restrict uploads from unaudited YouTube API projects to private visibility. Public scheduled publishing is therefore not guaranteed until the Google API project is eligible. GitHub scheduled workflows can also start late, so 7 PM IST is a target rather than an exact guarantee.
 
-## Repository setup
+## One-time setup
 
-1. In GitHub, open **Settings → Secrets and variables → Actions**.
+1. Open **Settings → Secrets and variables → Actions** in this repository.
 2. Add these repository secrets:
    - `YOUTUBE_CLIENT_ID`
    - `YOUTUBE_CLIENT_SECRET`
    - `YOUTUBE_REFRESH_TOKEN`
-3. The refresh token must be generated for the same Google account that owns/manages the target YouTube channel and must include the YouTube upload scope.
-4. Set repository variable `YOUTUBE_CHANNEL_ID` only if you want the workflow to sanity-check the expected channel.
-5. Keep `PUBLISH_PUBLIC` unset or `false` for initial tests. Set it to `true` only after checking several generated videos and confirming your API project can publish.
+3. Generate the refresh token for the Google account that manages the target YouTube channel, with the `youtube.upload` scope. Never commit credentials or paste them into source files.
+4. For private test uploads, leave the repository variable `SCHEDULE_PUBLIC` unset or set it to `false`.
+5. Only after private upload testing and confirming YouTube API eligibility, set `SCHEDULE_PUBLIC` to `true`. The uploader will upload privately with a scheduled publish time of 7 PM India time.
 6. In **Settings → Actions → General**, allow GitHub Actions to read and write repository contents so it can commit `storage/history.json`.
 
-## Run manually
+## Test the video renderer
 
-Actions → Daily Shorts → Run workflow.
+1. Open **Actions → Daily Shorts → Run workflow**.
+2. Keep `dry_run` enabled.
+3. Download the `shorts-dry-run` artifact from the completed run. It contains the rendered MP4.
+4. Check the voice, spelling, pacing, visuals and duration before enabling uploads.
 
-The scheduled run starts at 13:00 UTC (18:30 India time) to leave time for rendering and upload before the 19:00 India target. GitHub scheduled workflows can be delayed, so 7 PM is a target, not a guaranteed exact delivery time.
+## Schedule
+
+The daily workflow starts at 13:00 UTC (18:30 India time), leaving time to render and upload before the 19:00 India target. GitHub may delay scheduled runs.
 
 ## Local development
 
-Python 3.11+, FFmpeg and espeak-ng are required.
+Requires Python 3.11+, FFmpeg and espeak-ng.
 
 ```bash
 python -m pip install -r requirements.txt
 python main.py --dry-run
 ```
 
-A dry run creates a video in `output/` and does not contact YouTube.
+## Content rules
 
-## Content safety
-
-- GTA 6 scripts must be based on the checked-in fact bank and cite the source URL in the description.
-- Rumours/theories are explicitly labelled as speculation.
-- No leaked footage, copyrighted gameplay clips, copied scripts, fabricated release updates, or impersonation.
-- Story scripts are original text generated from local story structures.
-- Review platform rules on synthetic/altered content and monetization before enabling public uploads.
+- Use official sources for GTA 6 facts; label theories as speculation.
+- No leaks, fabricated updates, copied scripts, unauthorized gameplay footage or impersonation.
+- Story scripts are fictional and original to this project.
+- Review YouTube rules on synthetic/altered content and monetization before public publishing.
