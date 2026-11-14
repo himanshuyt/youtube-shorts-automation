@@ -43,7 +43,7 @@ jobs:
           YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
           YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
           YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
-          PUBLISH_PUBLIC: ${{ vars.PUBLISH_PUBLIC }}
+          SCHEDULE_PUBLIC: ${{ vars.SCHEDULE_PUBLIC }}
         run: python main.py
 
       - name: Commit topic history
