@@ -1,9 +1,13 @@
 import os
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
+
 from google.oauth2.credentials import Credentials
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
 
 SCOPES = ["https://www.googleapis.com/auth/youtube.upload"]
+IST = ZoneInfo("Asia/Kolkata")
 
 def youtube_client():
     required = ["YOUTUBE_CLIENT_ID", "YOUTUBE_CLIENT_SECRET", "YOUTUBE_REFRESH_TOKEN"]
@@ -20,9 +24,19 @@ def youtube_client():
     )
     return build("youtube", "v3", credentials=credentials, cache_discovery=False)
 
-def upload_video(video_path, metadata, publish_public=False):
+def next_publish_time_ist():
+    now = datetime.now(IST)
+    publish_at = now.replace(hour=19, minute=0, second=0, microsecond=0)
+    if publish_at <= now:
+        publish_at += timedelta(days=1)
+    return publish_at.isoformat()
+
+def upload_video(video_path, metadata, schedule_public=False):
     youtube = youtube_client()
-    status = {"privacyStatus": "public" if publish_public else "private", "selfDeclaredMadeForKids": False}
+    # Scheduled videos must be uploaded as private with a future publishAt timestamp.
+    status = {"privacyStatus": "private", "selfDeclaredMadeForKids": False}
+    if schedule_public:
+        status["publishAt"] = next_publish_time_ist()
     body = {
         "snippet": {
             "title": metadata["title"],
@@ -37,4 +51,4 @@ def upload_video(video_path, metadata, publish_public=False):
     response = None
     while response is None:
         _, response = request.next_chunk()
-    return response["id"]
+    return {"video_id": response["id"], "publish_at": status.get("publishAt")}
