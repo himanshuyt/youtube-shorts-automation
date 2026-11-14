@@ -1,0 +1,8 @@
+[
+  {"id":"last-train","theme":"mystery","seed":"A passenger boards the last train home and finds a note in a seat that describes what they will do next.","twist":"The note is in their own handwriting, dated tomorrow.","moral":"Sometimes the future is shaped by the choices we make today."},
+  {"id":"voicemail","theme":"emotional sci-fi","seed":"A young person receives a voicemail from someone they lost years ago.","twist":"The message is not from the past; it is a reply sent from a future version of a memory archive.","moral":"The people we love continue to shape the choices we make."},
+  {"id":"empty-room","theme":"horror","seed":"Every night, a motion sensor reports movement in a locked, empty room.","twist":"The camera finally reveals the person watching the footage standing behind the camera.","moral":"Fear grows when we refuse to question what we see."},
+  {"id":"paper-moon","theme":"fantasy","seed":"A child folds a paper moon and places it by the window to comfort a lonely star.","twist":"The next morning, the real moon has a tiny paper patch.","moral":"Small acts of kindness can reach farther than we imagine."},
+  {"id":"forgotten-name","theme":"emotional mystery","seed":"A librarian discovers a book that removes one memory each time it is opened.","twist":"The final blank page contains the librarian's own name.","moral":"Memories are precious because they make us who we are."},
+  {"id":"one-more-minute","theme":"sci-fi suspense","seed":"A broken watch gives its owner one extra minute whenever danger is near.","twist":"The watch stops only when its owner uses the minute to save someone else.","moral":"Time matters most when we give it to others."}
+]
