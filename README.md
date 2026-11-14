@@ -14,7 +14,7 @@ A zero-subscription, cloud-run starter for a daily vertical Shorts channel cover
 
 ## Important constraints
 
-This is a practical no-paid-API baseline, not a promise of studio-quality generative animation. GitHub-hosted runners are temporary and are not suitable for running large AI video models. The first version uses original motion-graphic scenes and synthetic narration. Better voices or AI-generated images can be added later if a genuinely free, reliable provider is selected.
+This is a practical no-paid-API starter, not a finished AI animation studio. The current renderer creates designed text-card scenes with synthetic narration; it does not yet generate moving character animation or AI images. GitHub-hosted runners are temporary and are not suitable for running large AI video models. A genuinely free and reliable animation/image provider would need to be added and tested before claiming full AI animation.
 
 YouTube Data API projects that have not passed the required audit may be restricted to private uploads. The code therefore supports private test mode and scheduled publishing, but publishing is not guaranteed until Google's API project is eligible. Never put OAuth credentials in the repository.
 
